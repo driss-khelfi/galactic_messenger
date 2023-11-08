@@ -19,3 +19,32 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+version = ''
+task createServerJar (type: Jar){
+    archiveBaseName = 'galactic_messenger_server'
+    archiveVersion =''
+    from sourceSets.main.output
+    include 'org/example/**'
+    manifest {
+        attributes 'Main-Class': 'org.example.Server'
+
+    }
+}
+
+task createClientJar (type: Jar) {
+    archiveBaseName = 'galactic_messenger_client'
+    archiveVersion = ''
+    from sourceSets.main.output
+    include 'org/example/**'
+    manifest {
+        attributes 'Main-Class': 'org.example.Client'
+
+    }
+}
+
+createServerJar.dependsOn build
+createClientJar.dependsOn build
+
+
+
+
