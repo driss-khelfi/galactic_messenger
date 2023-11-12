@@ -32,22 +32,21 @@ public class Client implements Runnable {
 
             out.println(commande + " " + nom + " " + hashedPassword);
 
+            String response = in.readLine();
 
-            if (commande.equals("/login")) {
-                System.out.println("vous êtes connecté");
-
-            } else if (commande.equals("/register")) {
-                System.out.println("vous êtes inscrit et connecté !\n");
-
-            } else if (commande.equals("/quit")) {
-                System.out.println("vous avez quitté le chat");
-                shutdown();
-            } else if (commande.equals("/help")) {
-                System.out.println("/login nom_d'utilisateur mot_de_passse : pour vous connecter");
-                System.out.println("/register nom_d'utilisateur mot_de_passs : pour vous inscrire");
-                System.out.println("/quit : pour quitter");
-            } else {
-                System.out.println("Vous n'avez pas choisi une commande existantante");
+            switch (response) {
+                case "/login" -> System.out.println("vous êtes connecté");
+                case "/register" -> System.out.println("vous êtes inscrit et connecté !\n");
+                case "/quit" -> {
+                    System.out.println("vous avez quitté le chat");
+                    shutdown();
+                }
+                case "/help" -> {
+                    System.out.println("/login nom_d'utilisateur mot_de_passse : pour vous connecter");
+                    System.out.println("/register nom_d'utilisateur mot_de_passs : pour vous inscrire");
+                    System.out.println("/quit : pour quitter");
+                }
+                default -> System.out.println("Vous n'avez pas choisi une commande existantante");
             }
 
             // crée un nouveau thread pour gérer les entrées clavier
